@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.XPTask" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <item name="fontFamily" type="font">@font/sans_fa_name_regular</item>
+
+    <style name="Theme.XPTask" parent="Base.Theme.XPTask" />
+</resources>
