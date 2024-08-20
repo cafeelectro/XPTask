@@ -34,6 +34,10 @@ class PresenterMainActivity(
                 override fun editData(taskEntity: TaskEntity) {
                     model.editData(taskEntity)
                 }
+
+                override fun deleteData(taskEntity: TaskEntity) {
+                    model.deleteData(taskEntity)
+                }
             }
         )
     }

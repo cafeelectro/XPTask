@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -10,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.ilidev.xptask"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -48,9 +49,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.room.ktx)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.room)
     implementation(libs.room.runtime)
-    implementation(libs.room.rxjava3)
-    implementation(libs.rxandroid)
-    implementation(libs.lifecycle.livedata.ktx)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
 }

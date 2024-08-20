@@ -10,34 +10,38 @@ import com.ilidev.xptask.db.dao.TaskEntity
 import com.ilidev.xptask.mvp.ext.OnBindData
 
 class RecyclerTaskAdapter(
-    private val tasks :ArrayList<TaskEntity>,
+    private val tasks: ArrayList<TaskEntity>,
     private val onBindData: OnBindData
-): RecyclerView.Adapter<RecyclerTaskAdapter.TaskViewHolder>() {
+) : RecyclerView.Adapter<RecyclerTaskAdapter.TaskViewHolder>() {
     inner class TaskViewHolder(
         private val binding: RecyclerItemBinding
-    ): ViewHolder(binding.root){
-        fun setData(data:TaskEntity){
+    ) : ViewHolder(binding.root) {
+
+
+        fun setData(data: TaskEntity) {
             binding.txtTitle.text = data.title
             binding.checkBox.isChecked = data.state
-            binding.checkBox.setOnClickListener{
-                if(binding.checkBox.isChecked){
-                    onBindData.editData(TaskEntity(data.id,data.title,true))
-                }else{
-                    onBindData.editData(TaskEntity(data.id,data.title,false))
+            binding.checkBox.setOnClickListener {
+                if (binding.checkBox.isChecked) {
+                    onBindData.editData(TaskEntity(data.id, data.title, true))
+                } else {
+                    onBindData.editData(TaskEntity(data.id, data.title, false))
                 }
                 binding.imgDelete.setOnClickListener {
-
+                    onBindData.deleteData(data)
                 }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        TaskViewHolder(RecyclerItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        ))
+        TaskViewHolder(
+            RecyclerItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun getItemCount() = tasks.size
 
@@ -45,9 +49,9 @@ class RecyclerTaskAdapter(
         holder.setData(tasks[position])
     }
 
-    fun dataUpdate(newList: ArrayList<TaskEntity>){
+    fun dataUpdate(newList: ArrayList<TaskEntity>) {
 
-        val diffCallBack = RecyclerDiffUtils(tasks,newList)
+        val diffCallBack = RecyclerDiffUtils(tasks, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
         tasks.clear()
         tasks.addAll(newList)

@@ -40,6 +40,14 @@ class ModelMainActivity(private val activity: AppCompatActivity) {
         }
     }
 
+    fun deleteData(taskEntity: TaskEntity) {
+        activity.lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                db.taskDao().deleteTasks(taskEntity)
+            }
+        }
+    }
+
     fun getData(state:Boolean,onBindData: OnBindData){
         activity.lifecycleScope.launch {
             withContext(Dispatchers.IO){
